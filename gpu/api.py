@@ -5,7 +5,7 @@ gpu_metrics = Blueprint('gpu_metrics', __name__)
 
 
 @gpu_metrics.route('/usage')
-def list():
+def usage():
     device_ids = GPUtil.getAvailable(
         order='first', limit=1, includeNan=False
     )

@@ -5,5 +5,5 @@ ram_metrics = Blueprint('ram_metrics', __name__)
 
 
 @ram_metrics.route('/usage')
-def list():
+def usage():
     return jsonify(psutil.virtual_memory()[2])
