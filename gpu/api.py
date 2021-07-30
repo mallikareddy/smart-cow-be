@@ -1,14 +1,12 @@
+from GPUtil import GPUtil
 from flask import Blueprint, jsonify
-from pynvml import *
 
 gpu_metrics = Blueprint('gpu_metrics', __name__)
 
 
 @gpu_metrics.route('/usage')
 def list():
-    # nvmlInit()
-    # handle = nvmlDeviceGetHandleByIndex(0)
-    # info = nvmlDeviceGetMemoryInfo(handle)
-    #
-    # info.used
-    return jsonify([])
+    device_ids = GPUtil.getAvailable(
+        order='first', limit=1, includeNan=False
+    )
+    return jsonify(device_ids[0].memoryUsed if len(device_ids) > 0 else 0)
